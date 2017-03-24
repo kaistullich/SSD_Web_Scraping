@@ -11,10 +11,18 @@ web_page_html = web_page.text
 soup = BeautifulSoup(web_page_html, 'lxml')
 
 # Containers that contain the items inside (outermost HTML wrapper)
-containers = soup.find_all("div", {"class": "item-container"})[1:]
+containers = soup.find_all("div", {"class": "item-container"})
 
 # Loop through all containers and find relevant information
 for container in containers:
     product_title = container.a.img['title']
+
+    price = container.find_all('li', {'class': 'price-current'})
+    product_price = price[0].strong.text
+
+    
+
+
+
 
 
