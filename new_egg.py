@@ -40,10 +40,12 @@ def scraping(bs):
 
         # If product has any special deals currently
         save = soup.find_all('li', {'class': 'price-save'})
+        # If a product does not have any special deals
         if save[0].strong is None:
             product_saving = 'No savings currently'
             savings.append(product_saving)
         else:
+            # Product has a special deal
             product_saving = save[0].strong.text
             savings.append(product_saving)
 
@@ -60,7 +62,7 @@ if __name__ == '__main__':
     soup = BeautifulSoup(web_page_html, 'lxml')
     # All products are stored in this object
     products = scraping(soup)
-
+    # Inserting into DB
     cur.executemany('INSERT INTO ssd_products VALUES (?, ?, ?, ?, ?)', products)
     conn.commit()
     conn.close()
