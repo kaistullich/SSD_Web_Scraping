@@ -1,5 +1,13 @@
 from bs4 import BeautifulSoup
 import requests
+import sqlite3
+
+db = 'SSD_PRODUCTS'
+conn = sqlite3.connect(db)
+cur = conn.cursor()
+
+cur.execute('''CREATE TABLE ssd_products
+              (product_id INTEGER PRIMARY KEY, name TEXT, price REAL, shipping TEXT)''')
 
 # New Egg Internal SSD url
 url = 'https://www.newegg.com/Internal-SSDs/SubCategory/ID-636'
