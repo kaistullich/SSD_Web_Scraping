@@ -19,10 +19,15 @@ for container in containers:
 
     price = container.find_all('li', {'class': 'price-current'})
     try:
-        product_strong = price[0].strong.text
-        product_sup = price[0].sup.text
-        product_price = product_strong + product_sup
-    except AttributeError:
+        price_strong = price[0].strong.text
+        price_sup = price[0].sup.text
+        product_price = price_strong + price_sup
+    except AttributeError as ae:
         pass
-    
+
+    shipping = container.find_all('li', {'class': 'price-ship'})
+    product_shipping = shipping[0].text.strip()
+
+
+
 
