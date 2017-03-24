@@ -7,7 +7,12 @@ conn = sqlite3.connect(db)
 cur = conn.cursor()
 
 cur.execute('''CREATE TABLE IF NOT EXISTS ssd_products
-              (product_id INTEGER PRIMARY KEY, name TEXT, price REAL, shipping TEXT, saving TEXT)''')
+              (product_id INTEGER PRIMARY KEY,
+                name TEXT,
+                price REAL,
+                shipping TEXT,
+                saving TEXT)
+            ''')
 
 
 def scraping(bs):
