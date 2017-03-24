@@ -44,7 +44,7 @@ def scraping(bs):
         shipping.append(product_shipping)
 
         # If product has any special deals currently
-        save = soup.find_all('li', {'class': 'price-save'})
+        save = container.find_all('li', {'class': 'price-save'})
         # If a product does not have any special deals
         if save[0].strong is None:
             product_saving = 'No savings currently'
