@@ -28,6 +28,8 @@ for container in containers:
     shipping = container.find_all('li', {'class': 'price-ship'})
     product_shipping = shipping[0].text.strip()
 
-
-
-
+    save = soup.find_all('li', {'class': 'price-save'})
+    if save[0].strong is None:
+        product_saving = 'No savings currently'
+    else:
+        product_saving = save[0].strong.text
