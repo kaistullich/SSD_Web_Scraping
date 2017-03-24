@@ -15,8 +15,9 @@ containers = soup.find_all("div", {"class": "item-container"})
 
 # Loop through all containers and find relevant information
 for container in containers:
+    # Product description
     product_title = container.a.img['title']
-
+    # Product Price
     price = container.find_all('li', {'class': 'price-current'})
     try:
         price_strong = price[0].strong.text
@@ -24,10 +25,10 @@ for container in containers:
         product_price = price_strong + price_sup
     except AttributeError as ae:
         pass
-
+    # Product shipping information
     shipping = container.find_all('li', {'class': 'price-ship'})
     product_shipping = shipping[0].text.strip()
-
+    # If product has any special deals currently
     save = soup.find_all('li', {'class': 'price-save'})
     if save[0].strong is None:
         product_saving = 'No savings currently'
