@@ -37,7 +37,7 @@ def scraping(bs):
         price = container.find_all('li', {'class': 'price-current'})
         price_strong = price[0].strong.text
         price_sup = price[0].sup.text
-        product_price = price_strong + price_sup
+        product_price = '$' + price_strong + price_sup
         prices.append(product_price)
 
         # Product shipping information
