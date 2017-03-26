@@ -7,7 +7,7 @@ conn = sqlite3.connect(db)
 cur = conn.cursor()
 
 cur.execute('''CREATE TABLE IF NOT EXISTS ssd_products
-              (product_id INTEGER PRIMARY KEY,
+              (product_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
                 price REAL,
                 shipping TEXT,
@@ -66,8 +66,8 @@ if __name__ == '__main__':
     # Create BeautifulSoup object
     soup = BeautifulSoup(web_page_html, 'lxml')
     # All products are stored in this object
-    products = scraping(soup)
+    title, price, ship, save = scraping(soup)
     # Inserting into DB
-    cur.executemany('INSERT INTO ssd_products VALUES (?, ?, ?, ?, ?)', products)
+    cur.execute('INSERT INTO ssd_products VALUES (?, ?, ?, ?, ?)', (None, title, price, ship, save))
     conn.commit()
     conn.close()
