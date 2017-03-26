@@ -1,6 +1,8 @@
-from bs4 import BeautifulSoup
-import requests
+import csv
 import sqlite3
+
+import requests
+from bs4 import BeautifulSoup
 
 db = 'SSD_PRODUCTS.sqlite'
 conn = sqlite3.connect(db)
@@ -66,8 +68,12 @@ if __name__ == '__main__':
     # Create BeautifulSoup object
     soup = BeautifulSoup(web_page_html, 'lxml')
     # All products are stored in this object
-    title, price, ship, save = scraping(soup)
+    products = scraping(soup)
+    # Creating .CSV file
+    with open('ssd_products.csv', 'w') as f:
+        file = csv.writer(f)
+        file.writerows(products)
     # Inserting into DB
-    cur.execute('INSERT INTO ssd_products VALUES (?, ?, ?, ?, ?)', (None, title, price, ship, save))
+    cur.executemany('INSERT INTO ssd_products VALUES (?, ?, ?, ?, ?)', products)
     conn.commit()
     conn.close()
