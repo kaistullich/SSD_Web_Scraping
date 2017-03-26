@@ -76,4 +76,5 @@ if __name__ == '__main__':
     # Inserting into DB
     cur.executemany('INSERT INTO ssd_products VALUES (?, ?, ?, ?, ?)', products)
     conn.commit()
+    # Close connection to DB
     conn.close()
